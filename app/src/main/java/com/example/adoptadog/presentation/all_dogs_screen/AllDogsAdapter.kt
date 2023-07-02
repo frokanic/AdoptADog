@@ -7,7 +7,7 @@ import com.example.adoptadog.databinding.DogItemBinding
 import com.example.adoptadog.domain.model.Dog
 
 class AllDogsAdapter(
-    var dogs: List<Dog>,
+    private var dogs: List<Dog>,
     private val onDogClicked: (Dog) -> Unit
 ) : RecyclerView.Adapter<AllDogsAdapter.DogViewHolder>() {
 

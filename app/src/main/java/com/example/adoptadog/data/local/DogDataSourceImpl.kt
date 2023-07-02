@@ -1,6 +1,5 @@
 package com.example.adoptadog.data.local
 
-import android.util.Log
 import com.example.adoptadog.data.model.DogResponse
 import com.example.adoptadog.data.remote.DogApi
 import com.example.adoptadog.domain.model.Dog
@@ -15,8 +14,7 @@ class DogDataSourceImpl @Inject constructor(private val dogApi: DogApi, private 
     override suspend fun getRandomDog(): DogResponse {
         val response = dogApi.getRandomDog()
         if (response.isSuccessful) {
-            val dogResponse = response.body()!!
-            return dogResponse
+            return response.body()!!
         } else {
             throw Exception("Error fetching data from API")
         }
@@ -24,7 +22,6 @@ class DogDataSourceImpl @Inject constructor(private val dogApi: DogApi, private 
 
     override suspend fun getSavedDogs(): RealmResults<Dog> {
         val realm = Realm.open(configuration)
-        val result = realm.query(Dog::class).find()
-        return result
+        return realm.query(Dog::class).find()
     }
 }

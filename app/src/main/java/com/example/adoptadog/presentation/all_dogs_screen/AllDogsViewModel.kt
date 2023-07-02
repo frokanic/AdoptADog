@@ -22,7 +22,6 @@ import javax.inject.Inject
 class AllDogsViewModel @Inject constructor(
     private val dogInteractors: DogInteractor,
     private val connectivityObserver: ConnectivityObserver,
-    @ApplicationContext private val context: Context
     ) : ViewModel() {
 
     private val _dogs = MutableStateFlow<List<Dog>>(emptyList())

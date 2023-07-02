@@ -24,9 +24,8 @@ class DogRepositoryImpl(val api: DogApi, val realm: Realm) : DogRepository {
                     this.copyToRealm(dog)
                 }
             }
-            val allDogs = realm.query<Dog>().find()
-            // New Log: check if the dog is stored successfully
-            val storedDog = realm.query<Dog>("breed == $0 AND imageUrl == $1", dog.breed, dog.imageUrl).find().firstOrNull()
+//            val allDogs = realm.query<Dog>().find()
+//            val storedDog = realm.query<Dog>("breed == $0 AND imageUrl == $1", dog.breed, dog.imageUrl).find().firstOrNull()
         }
     }
 

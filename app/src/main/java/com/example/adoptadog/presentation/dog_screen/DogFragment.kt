@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DogFragment : Fragment() {
     private var _binding: FragmentDogBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: DogViewModel by viewModels() // ensure ViewModel factory is set up
+    private val viewModel: DogViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -25,17 +25,8 @@ class DogFragment : Fragment() {
 
         val dogId = DogFragmentArgs.fromBundle(requireArguments()).dogId
         viewModel.loadDog(dogId)
-        Log.d("DOGFRAGMENTOBSERVE", viewModel.loadDog(dogId).toString())
 
-        viewModel.dog.observe(viewLifecycleOwner) { dog ->
-            Log.d("DOGFRAGMENTOBSERVE", dog.breed)
-            binding.title.text = dog?.breed
-            binding.image.load(dog?.imageUrl) {
-                crossfade(true)
-            }
-        }
-
-
+        setupObservers()
         setupClickListeners()
 
         return binding.root
@@ -44,6 +35,15 @@ class DogFragment : Fragment() {
     private fun setupClickListeners() {
         binding.backButton.setOnClickListener {
             findNavController().navigateUp()
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.dog.observe(viewLifecycleOwner) { dog ->
+            binding.title.text = dog?.breed
+            binding.image.load(dog?.imageUrl) {
+                crossfade(true)
+            }
         }
     }
 
