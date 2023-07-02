@@ -16,7 +16,6 @@ class AllDogsAdapter(
         notifyDataSetChanged()
     }
 
-
     inner class DogViewHolder(private val itemBinding: DogItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(dog: Dog) {

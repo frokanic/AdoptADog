@@ -25,12 +25,16 @@ class DogFragment : Fragment() {
 
         val dogId = DogFragmentArgs.fromBundle(requireArguments()).dogId
         viewModel.loadDog(dogId)
+        Log.d("DOGFRAGMENTOBSERVE", viewModel.loadDog(dogId).toString())
+
         viewModel.dog.observe(viewLifecycleOwner) { dog ->
+            Log.d("DOGFRAGMENTOBSERVE", dog.breed)
             binding.title.text = dog?.breed
             binding.image.load(dog?.imageUrl) {
                 crossfade(true)
             }
         }
+
 
         setupClickListeners()
 

@@ -16,19 +16,25 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AllDogsFragment : Fragment() {
+
     private var _binding: FragmentAllDogsBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: AllDogsViewModel by viewModels()
 
+    val adapter = AllDogsAdapter(emptyList()) { dog ->
+        val action = AllDogsFragmentDirections.actionAllDogsFragmentToDogFragment(dog.id.toHexString())
+        findNavController().navigate(action)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAllDogsBinding.inflate(inflater, container, false)
-        val adapter = AllDogsAdapter(emptyList()) { dog ->
-            val action = AllDogsFragmentDirections.actionAllDogsFragmentToDogFragment(dog.id.toString())
-            findNavController().navigate(action)
-        }
+//        val adapter = AllDogsAdapter(emptyList()) { dog ->
+//            val action = AllDogsFragmentDirections.actionAllDogsFragmentToDogFragment(dog.id.toString())
+//            findNavController().navigate(action)
+//        }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter

@@ -24,7 +24,7 @@ class DogViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             if (id.isNotEmpty()) {
                 try {
-                    val objectId = ObjectId(hexString = id)
+                    val objectId = ObjectId(hexString = id) // It should work now
                     repository.getDogById(objectId).collect { dogList ->
                         if (dogList.isNotEmpty()) {
                             dog.postValue(dogList[0])
@@ -38,6 +38,7 @@ class DogViewModel @Inject constructor(
             }
         }
     }
+
 
 }
 
