@@ -1,7 +1,10 @@
 package com.example.adoptadog.di
 
+import android.content.Context
 import com.example.adoptadog.data.remote.DogApi
 import com.example.adoptadog.data.repository.DogRepositoryImpl
+import com.example.adoptadog.domain.connectivity.ConnectivityObserver
+import com.example.adoptadog.domain.connectivity.ConnectivityObserverImpl
 import com.example.adoptadog.domain.interactor.DogInteractor
 import com.example.adoptadog.domain.model.Dog
 import com.example.adoptadog.domain.repository.DogRepository
@@ -9,6 +12,7 @@ import com.example.adoptadog.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
@@ -60,5 +64,9 @@ object AppModule {
         return DogInteractor(dogRepository)
     }
 
-
+    @Singleton
+    @Provides
+    fun provideConnectivityObserver(@ApplicationContext context: Context): ConnectivityObserver {
+        return ConnectivityObserverImpl(context)
+    }
 }

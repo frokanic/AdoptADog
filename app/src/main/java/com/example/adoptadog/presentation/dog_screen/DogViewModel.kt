@@ -38,7 +38,5 @@ class DogViewModel @Inject constructor(
             }
         }
     }
-
-
 }
 

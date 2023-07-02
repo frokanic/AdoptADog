@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -31,35 +32,56 @@ class AllDogsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAllDogsBinding.inflate(inflater, container, false)
-//        val adapter = AllDogsAdapter(emptyList()) { dog ->
-//            val action = AllDogsFragmentDirections.actionAllDogsFragmentToDogFragment(dog.id.toString())
-//            findNavController().navigate(action)
-//        }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
 
+        observeDogs()
+        setupClickListeners()
+        observeNetworkStatus()
+
+        return binding.root
+    }
+
+    private fun observeDogs() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.dogs.collect { dogs ->
                 adapter.updateDogs(dogs)
             }
         }
-
-
-        setupClickListeners()
-        return binding.root
     }
 
     private fun setupClickListeners() {
         binding.btnGetADog.setOnClickListener {
-            viewModel.getRandomDogAndStore()
+            if (viewModel.isNetworkAvailable.value) {
+                viewModel.getRandomDogAndStore()
+            } else {
+                showNoInternetConnectionToast()
+            }
         }
     }
 
+    private fun showNoInternetConnectionToast() {
+        Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun observeNetworkStatus() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isNetworkAvailable.collect { isNetworkAvailable ->
+                if (viewModel.isNetworkAvailableInitialized.value == true) {
+                    binding.btnGetADog.isEnabled = isNetworkAvailable == true
+                    if (isNetworkAvailable == false) {
+                        showNoInternetConnectionToast()
+                    }
+                }
+            }
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
+
 
