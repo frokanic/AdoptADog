@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/allDogsFragment">
+
+    <fragment
+        android:id="@+id/allDogsFragment"
+        android:name="com.example.adoptadog.presentation.all_dogs_screen.AllDogsFragment"
+        android:label="All Dogs"
+        tools:layout="@layout/fragment_all_dogs" >
+        <action
+            android:id="@+id/action_allDogsFragment_to_dogFragment"
+            app:destination="@id/dogFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dogFragment"
+        android:name="com.example.adoptadog.presentation.dog_screen.DogFragment"
+        android:label="Dog Details"
+        tools:layout="@layout/fragment_dog" >
+        <argument
+            android:name="dogId"
+            app:argType="string" />
+    </fragment>
+
+</navigation>
