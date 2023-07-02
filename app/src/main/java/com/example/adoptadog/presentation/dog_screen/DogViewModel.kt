@@ -5,10 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.adoptadog.domain.interactor.DogInteractor
 import com.example.adoptadog.domain.model.Dog
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.mongodb.kbson.ObjectId
+import javax.inject.Inject
 
-class DogViewModel(private val dogInteractors: DogInteractor) : ViewModel() {
+@HiltViewModel
+class DogViewModel @Inject constructor(private val dogInteractors: DogInteractor) : ViewModel() {
     val dog = MutableLiveData<Dog?>()
 
     fun loadDog(id: String) {

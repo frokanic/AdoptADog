@@ -5,9 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.adoptadog.domain.interactor.DogInteractor
 import com.example.adoptadog.domain.model.Dog
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AllDogsViewModel(private val dogInteractors: DogInteractor) : ViewModel() {
+@HiltViewModel
+class AllDogsViewModel @Inject constructor(private val dogInteractors: DogInteractor) : ViewModel() {
     val dogs = MutableLiveData<List<Dog>>()
 
     fun loadDogs() {
