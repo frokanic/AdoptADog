@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.adoptadog.databinding.FragmentDogBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,14 +26,21 @@ class DogFragment : Fragment() {
         val dogId = DogFragmentArgs.fromBundle(requireArguments()).dogId
         viewModel.loadDog(dogId)
         viewModel.dog.observe(viewLifecycleOwner) { dog ->
-            Log.d("DOGFRAGMENTIMAGE", dog.toString())
             binding.title.text = dog?.breed
             binding.image.load(dog?.imageUrl) {
                 crossfade(true)
             }
         }
 
+        setupClickListeners()
+
         return binding.root
+    }
+
+    private fun setupClickListeners() {
+        binding.backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     override fun onDestroyView() {

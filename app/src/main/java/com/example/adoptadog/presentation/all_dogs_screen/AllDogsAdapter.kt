@@ -1,6 +1,5 @@
 package com.example.adoptadog.presentation.all_dogs_screen
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +13,6 @@ class AllDogsAdapter(
 
     fun updateDogs(newDogs: List<Dog>) {
         this.dogs = newDogs
-        Log.d("AllDogsAdapter", "Updated dogs: $newDogs")
         notifyDataSetChanged()
     }
 
@@ -30,18 +28,15 @@ class AllDogsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
-        Log.d("ALLDOGSADAPTER", "Creating view holder for item type $viewType")
         val binding = DogItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DogViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: DogViewHolder, position: Int) {
-        Log.d("ALLDOGSADAPTER", "Binding item at position $position")
         holder.bind(dogs[position])
     }
 
     override fun getItemCount(): Int {
-        Log.d("AllDogsAdapter", "Item count: ${dogs.size}")
         return dogs.size
     }
 }

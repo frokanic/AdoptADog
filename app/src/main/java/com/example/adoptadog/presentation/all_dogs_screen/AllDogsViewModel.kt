@@ -1,6 +1,5 @@
 package com.example.adoptadog.presentation.all_dogs_screen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.adoptadog.domain.interactor.DogInteractor
@@ -21,10 +20,9 @@ class AllDogsViewModel @Inject constructor(private val dogInteractors: DogIntera
         loadDogs()
     }
 
-    fun loadDogs() {
+    private fun loadDogs() {
         viewModelScope.launch {
             dogInteractors.getStoredDogs().collect { dogList ->
-                Log.d("AllDogsViewModel", "Loaded dogs: $dogList")
                 _dogs.value = dogList
             }
         }
@@ -33,7 +31,6 @@ class AllDogsViewModel @Inject constructor(private val dogInteractors: DogIntera
     fun getRandomDogAndStore() {
         viewModelScope.launch {
             dogInteractors.getAndStoreRandomDog()
-            loadDogs()
         }
     }
 }

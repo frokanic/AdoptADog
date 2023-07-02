@@ -1,7 +1,6 @@
 package com.example.adoptadog.presentation.all_dogs_screen
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,9 +35,7 @@ class AllDogsFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.dogs.collect { dogs ->
-                Log.d("AllDogsFragment", "Observing dogs: $dogs")
                 adapter.updateDogs(dogs)
-                Log.d("AllDogsFragment", "Updated adapter with ${dogs.size} items")
             }
         }
 

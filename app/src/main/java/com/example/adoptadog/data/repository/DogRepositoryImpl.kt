@@ -13,13 +13,11 @@ import org.mongodb.kbson.ObjectId
 class DogRepositoryImpl(val api: DogApi, val realm: Realm) : DogRepository {
     override suspend fun getAndStoreDog() {
         val response = api.getRandomDog().body()
-        Log.d("DogRepositoryImpl", "Response: $response")
         if (response != null) {
             val dog = Dog().apply {
                 breed = response.message.split("/")[4]
                 imageUrl = response.message
             }
-            Log.d("DogRepositoryImpl", "Dog to be stored: $dog")
             realm.write {
                 val existingDog = this.query<Dog>("breed == $0 AND imageUrl == $1", dog.breed, dog.imageUrl).find().firstOrNull()
                 if (existingDog == null) {
@@ -27,12 +25,8 @@ class DogRepositoryImpl(val api: DogApi, val realm: Realm) : DogRepository {
                 }
             }
             val allDogs = realm.query<Dog>().find()
-            Log.d("DogRepositoryImpl", "All dogs after storing: $allDogs")
             // New Log: check if the dog is stored successfully
             val storedDog = realm.query<Dog>("breed == $0 AND imageUrl == $1", dog.breed, dog.imageUrl).find().firstOrNull()
-            Log.d("DogRepositoryImpl", "Stored dog: $storedDog")
-        } else {
-            Log.d("DogRepositoryImpl", "Response is null")
         }
     }
 
@@ -41,7 +35,6 @@ class DogRepositoryImpl(val api: DogApi, val realm: Realm) : DogRepository {
 
     override fun getStoredDogs(): Flow<List<Dog>> {
         val results = realm.query<Dog>().find()
-        Log.d("DogRepositoryImpl", "Stored dogs: $results")
         return results.asFlow().map { it.list }
     }
 

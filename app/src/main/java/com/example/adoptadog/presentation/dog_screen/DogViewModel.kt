@@ -16,7 +16,9 @@ import javax.inject.Inject
 class DogViewModel @Inject constructor(
     private val repository: DogRepository
 ) : ViewModel() {
+
     var dog = MutableLiveData<Dog>()
+    val TAG = "DogViewModel"
 
     fun loadDog(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -27,13 +29,11 @@ class DogViewModel @Inject constructor(
                         if (dogList.isNotEmpty()) {
                             dog.postValue(dogList[0])
                         } else {
-                            // No dog was found with the provided ID
-                            Log.e("DogViewModel", "No dog was found with ID: $id")
+                            Log.e(TAG, "No dog was found with ID: $id")
                         }
                     }
                 } catch (e: IllegalArgumentException) {
-                    // Log the exception or show a message to the user
-                    Log.e("DogViewModel", "Invalid ObjectId: $id", e)
+                    Log.e(TAG, "Invalid ObjectId: $id", e)
                 }
             }
         }
