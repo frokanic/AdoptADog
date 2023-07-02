@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.example.adoptadog.R
 import com.example.adoptadog.databinding.FragmentAllDogsBinding
 import dagger.hilt.android.AndroidEntryPoint
 

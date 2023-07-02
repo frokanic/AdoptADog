@@ -5,9 +5,7 @@ import com.example.adoptadog.domain.model.Dog
 import com.example.adoptadog.domain.repository.DogRepository
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
-import io.realm.kotlin.notifications.ResultsChange
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import org.mongodb.kbson.ObjectId
 
