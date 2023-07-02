@@ -20,4 +20,13 @@ class AllDogsViewModel @Inject constructor(private val dogInteractors: DogIntera
             }
         }
     }
+
+    fun getRandomDogAndStore() {
+        viewModelScope.launch {
+            dogInteractors.getAndStoreRandomDog()
+            loadDogs() // Load dogs again after a new dog is added.
+        }
+    }
 }
+
+

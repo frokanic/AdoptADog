@@ -33,7 +33,15 @@ class AllDogsFragment : Fragment() {
             adapter.dogs = dogs
             adapter.notifyDataSetChanged()
         }
+
+        setupClickListeners()
         return binding.root
+    }
+
+    private fun setupClickListeners() {
+        binding.btnGetADog.setOnClickListener {
+            viewModel.getRandomDogAndStore()
+        }
     }
 
     override fun onDestroyView() {

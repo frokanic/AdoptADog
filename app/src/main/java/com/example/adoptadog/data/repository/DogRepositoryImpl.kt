@@ -33,7 +33,7 @@ class DogRepositoryImpl(val api: DogApi, val realm: Realm) : DogRepository {
         return realm.query<Dog>().asFlow().map { it.list }
     }
 
-    override suspend fun getDogById(id: ObjectId): Flow<List<Dog>> {
+    override fun getDogById(id: ObjectId): Flow<List<Dog>> {
         return realm.query<Dog>("id == $0", id).asFlow().map { it.list }
     }
 }

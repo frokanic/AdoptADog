@@ -10,6 +10,6 @@ interface DogRepository {
 
     suspend fun getAndStoreDog()
     fun getStoredDogs(): Flow<List<Dog>>
-    suspend fun getDogById(id: ObjectId): Flow<List<Dog>>
+    fun getDogById(id: ObjectId): Flow<List<Dog>>
 }
 

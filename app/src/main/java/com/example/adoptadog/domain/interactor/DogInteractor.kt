@@ -17,7 +17,7 @@ class DogInteractor(private val dogRepository: DogRepository) {
         return dogRepository.getStoredDogs()
     }
 
-    suspend fun getDogById(id: ObjectId): Flow<List<Dog>>  {
+    fun getDogById(id: ObjectId): Flow<List<Dog>>  {
         return dogRepository.getDogById(id)
     }
 }
