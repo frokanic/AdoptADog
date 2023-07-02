@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,8 +26,11 @@ class AllDogsFragment : Fragment() {
 
     val adapter = AllDogsAdapter(emptyList()) { dog ->
         val action = AllDogsFragmentDirections.actionAllDogsFragmentToDogFragment(dog.id.toHexString())
-        findNavController().navigate(action)
+        if (findNavController().currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+            findNavController().navigate(action)
+        }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
