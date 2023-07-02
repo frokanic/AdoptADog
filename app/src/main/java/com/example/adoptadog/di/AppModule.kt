@@ -40,7 +40,7 @@ object AppModule {
         val client = OkHttpClient.Builder().build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL) // replace with your base URL
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

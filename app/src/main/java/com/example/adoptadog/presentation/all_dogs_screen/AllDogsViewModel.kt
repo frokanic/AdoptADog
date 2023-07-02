@@ -1,22 +1,31 @@
 package com.example.adoptadog.presentation.all_dogs_screen
 
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.adoptadog.domain.interactor.DogInteractor
 import com.example.adoptadog.domain.model.Dog
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AllDogsViewModel @Inject constructor(private val dogInteractors: DogInteractor) : ViewModel() {
-    val dogs = MutableLiveData<List<Dog>>()
+
+    private val _dogs = MutableStateFlow<List<Dog>>(emptyList())
+    val dogs: StateFlow<List<Dog>> = _dogs
+
+    init {
+        loadDogs()
+    }
 
     fun loadDogs() {
         viewModelScope.launch {
             dogInteractors.getStoredDogs().collect { dogList ->
-                dogs.value = dogList
+                Log.d("AllDogsViewModel", "Loaded dogs: $dogList")
+                _dogs.value = dogList
             }
         }
     }
@@ -24,7 +33,7 @@ class AllDogsViewModel @Inject constructor(private val dogInteractors: DogIntera
     fun getRandomDogAndStore() {
         viewModelScope.launch {
             dogInteractors.getAndStoreRandomDog()
-            loadDogs() // Load dogs again after a new dog is added.
+            loadDogs()
         }
     }
 }
