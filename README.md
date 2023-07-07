@@ -1,13 +1,12 @@
 # AdoptADog App 🐶
 
-The AdoptADog App is an Android application that allows users to browse and adopt dogs from various breeds. Users can view random dog images, store dogs they are interested in, and get detailed information about individual dogs.
+The AdoptADog App is an Android application that allows users to browse dogs from various breeds. Users can view random dog images, store dogs they are interested in, and get detailed information about individual dogs.
 
 ## Features ✨
 
-- Browse and adopt dogs from various breeds.
 - View random dog images.
 - Store dogs of interest for future reference.
-- Offline functionality to access stored dogs.
+- Offline functionality to access stored dogs (Images cannot be accessed offline at the moment).
 - Utilizes the Clean Architecture principles for separation of concerns and maintainability.
 - Implements Hilt for dependency injection to enhance code modularity and testability.
 - Uses Realm as the local database for efficient data storage and retrieval.
