@@ -2,9 +2,6 @@
 
 The AdoptADog App is an Android application that allows users to browse and adopt dogs from various breeds. Users can view random dog images, store dogs they are interested in, and get detailed information about individual dogs.
 
-📷 **Screenshot:**
-
-
 ## Features ✨
 
 - Browse and adopt dogs from various breeds.
@@ -27,13 +24,8 @@ The AdoptADog App is an Android application that allows users to browse and adop
 - 📚 [RecyclerView](https://developer.android.com/jetpack/androidx/releases/recyclerview) for displaying lists of dogs
 - 🖼️ [Glide](https://github.com/bumptech/glide) for image loading and caching
 
-## Usage 👩‍💻
+## Screenshot 📷
 
-To run the AdoptADog App, you need to have Android Studio installed. Follow these steps:
-
-1. Clone the repository: `git clone https://github.com/your-username/your-repo.git`
-2. Open the project in Android Studio.
-3. Build and run the app on an Android device or emulator.
 
 ## Contact 📧
 
